@@ -25,6 +25,9 @@ require('packer').startup(function(use)
       'folke/neodev.nvim',
     },
   }
+  use { "akinsho/toggleterm.nvim", tag = '*', config = function()
+    require("toggleterm").setup()
+  end }
   use('theprimeagen/harpoon')
   use { -- Autocompletion
     'hrsh7th/nvim-cmp',
