@@ -11,6 +11,15 @@ require('packer').startup(function(use)
   -- Package manager
   use 'wbthomason/packer.nvim'
   use 'folke/tokyonight.nvim'
+  use 'jiangmiao/auto-pairs'
+  use {
+    "windwp/nvim-autopairs",
+    config = function() require("nvim-autopairs").setup {} end
+  }
+  use({
+    "iamcco/markdown-preview.nvim",
+    run = function() vim.fn["mkdp#util#install"]() end,
+  })
   use { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     requires = {
@@ -40,6 +49,29 @@ require('packer').startup(function(use)
     },
     tag = 'nightly' -- optional, updated every week. (see issue #1193)
   }
+  use {
+    'glepnir/dashboard-nvim',
+    event = 'VimEnter',
+    config = function()
+      require('dashboard').setup {
+        theme = 'hyper',
+        config = {
+          week_header = {
+            enable = true,
+          },
+          shortcut = {
+            {
+              desc = ' Files',
+              group = 'Label',
+              action = 'Telescope find_files',
+              key = 'f',
+            },
+          },
+        },
+      }
+    end,
+    requires = { 'nvim-tree/nvim-web-devicons' }
+  }
 
   use { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
@@ -52,6 +84,9 @@ require('packer').startup(function(use)
     'nvim-treesitter/nvim-treesitter-textobjects',
     after = 'nvim-treesitter',
   }
+
+  use 'nvim-tree/nvim-web-devicons'
+  use { 'romgrk/barbar.nvim', requires = 'nvim-web-devicons' }
 
   -- Git related plugins
   use 'tpope/vim-fugitive'

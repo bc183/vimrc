@@ -1,6 +1,6 @@
 require('barathc')
 
--- Enable Comment.nvim
+--Enable Comment.nvim
 require('Comment').setup()
 
 -- Enable `lukas-reineke/indent-blankline.nvim`
